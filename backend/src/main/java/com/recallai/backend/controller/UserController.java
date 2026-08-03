@@ -2,6 +2,9 @@ package com.recallai.backend.controller;
 
 import com.recallai.backend.entity.User;
 import com.recallai.backend.service.UserService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User registerUser(@RequestBody User user) {
+    public User registerUser(@Valid @RequestBody User user) {
         return userService.registerUser(user);
     }
 
