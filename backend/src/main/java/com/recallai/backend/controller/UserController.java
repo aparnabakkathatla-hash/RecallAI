@@ -2,9 +2,6 @@ package com.recallai.backend.controller;
 
 import com.recallai.backend.entity.User;
 import com.recallai.backend.service.UserService;
-
-import jakarta.validation.Valid;
-
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +17,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User registerUser(@Valid @RequestBody User user) {
+    public User registerUser(@RequestBody User user) {
         return userService.registerUser(user);
     }
 
@@ -30,7 +27,20 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
+    public User getUser(@PathVariable Long id) {
         return userService.getUserById(id);
+    }
+
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id,
+                           @RequestBody User user) {
+
+        return userService.updateUser(id, user);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable Long id) {
+
+        return userService.deleteUser(id);
     }
 }
