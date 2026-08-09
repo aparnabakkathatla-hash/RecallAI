@@ -12,23 +12,36 @@ public class LearningItem {
 
     private String topic;
 
-    @Column(length = 5000)
     private String content;
 
     private String subject;
 
+    // Connect LearningItem to User
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    // Default constructor
     public LearningItem() {
     }
 
-    public LearningItem(Long id, String topic, String content, String subject) {
+    // Constructor
+    public LearningItem(Long id, String topic, String content, String subject, User user) {
         this.id = id;
         this.topic = topic;
         this.content = content;
         this.subject = subject;
+        this.user = user;
     }
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTopic() {
@@ -55,7 +68,11 @@ public class LearningItem {
         this.subject = subject;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
