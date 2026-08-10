@@ -8,4 +8,8 @@ import java.util.List;
 public interface LearningItemRepository extends JpaRepository<LearningItem, Long> {
 
     List<LearningItem> findByUserId(Long userId);
+
+    List<LearningItem> findByTopicContainingIgnoreCase(String topic);
+
+    List<LearningItem> findBySubjectContainingIgnoreCase(String subject);
 }

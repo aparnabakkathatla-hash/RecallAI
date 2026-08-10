@@ -15,41 +15,28 @@ public class LearningItemService {
         this.learningItemRepository = learningItemRepository;
     }
 
-    // Create
+    // Save a learning item
     public LearningItem saveLearningItem(LearningItem learningItem) {
         return learningItemRepository.save(learningItem);
     }
 
-    // Get all
+    // Get all learning items
     public List<LearningItem> getAllLearningItems() {
         return learningItemRepository.findAll();
     }
 
-    // Get by user
+    // Get learning items by user
     public List<LearningItem> getLearningItemsByUserId(Long userId) {
         return learningItemRepository.findByUserId(userId);
     }
 
-    // Update
-    public LearningItem updateLearningItem(Long id, LearningItem updatedItem) {
-
-        LearningItem existingItem = learningItemRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Learning item not found"));
-
-        existingItem.setTopic(updatedItem.getTopic());
-        existingItem.setContent(updatedItem.getContent());
-        existingItem.setSubject(updatedItem.getSubject());
-
-        return learningItemRepository.save(existingItem);
+    // Search by topic
+    public List<LearningItem> searchByTopic(String topic) {
+        return learningItemRepository.findByTopicContainingIgnoreCase(topic);
     }
 
-    // Delete
-    public void deleteLearningItem(Long id) {
-
-        if (!learningItemRepository.existsById(id)) {
-            throw new RuntimeException("Learning item not found");
-        }
-
-        learningItemRepository.deleteById(id);
+    // Search by subject
+    public List<LearningItem> searchBySubject(String subject) {
+        return learningItemRepository.findBySubjectContainingIgnoreCase(subject);
     }
 }
