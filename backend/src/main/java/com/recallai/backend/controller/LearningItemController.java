@@ -27,4 +27,10 @@ public class LearningItemController {
     public List<LearningItem> getAllLearningItems() {
         return learningItemService.getAllLearningItems();
     }
+
+    // Get learning items for a specific user
+    @GetMapping("/user/{userId}")
+    public List<LearningItem> getLearningItemsByUserId(@PathVariable Long userId) {
+        return learningItemService.getLearningItemsByUserId(userId);
+    }
 }

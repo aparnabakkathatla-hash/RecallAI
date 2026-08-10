@@ -24,4 +24,9 @@ public class LearningItemService {
     public List<LearningItem> getAllLearningItems() {
         return learningItemRepository.findAll();
     }
+
+    // Get learning items by user ID
+    public List<LearningItem> getLearningItemsByUserId(Long userId) {
+        return learningItemRepository.findByUserId(userId);
+    }
 }
