@@ -16,21 +16,44 @@ public class LearningItemController {
         this.learningItemService = learningItemService;
     }
 
-    // Create a learning item
+    // Create
     @PostMapping
-    public LearningItem createLearningItem(@RequestBody LearningItem learningItem) {
+    public LearningItem createLearningItem(
+            @RequestBody LearningItem learningItem) {
+
         return learningItemService.saveLearningItem(learningItem);
     }
 
-    // Get all learning items
+    // Get all
     @GetMapping
     public List<LearningItem> getAllLearningItems() {
+
         return learningItemService.getAllLearningItems();
     }
 
-    // Get learning items for a specific user
+    // Get by user
     @GetMapping("/user/{userId}")
-    public List<LearningItem> getLearningItemsByUserId(@PathVariable Long userId) {
+    public List<LearningItem> getLearningItemsByUserId(
+            @PathVariable Long userId) {
+
         return learningItemService.getLearningItemsByUserId(userId);
+    }
+
+    // Update
+    @PutMapping("/{id}")
+    public LearningItem updateLearningItem(
+            @PathVariable Long id,
+            @RequestBody LearningItem learningItem) {
+
+        return learningItemService.updateLearningItem(id, learningItem);
+    }
+
+    // Delete
+    @DeleteMapping("/{id}")
+    public String deleteLearningItem(@PathVariable Long id) {
+
+        learningItemService.deleteLearningItem(id);
+
+        return "Learning item deleted successfully";
     }
 }
