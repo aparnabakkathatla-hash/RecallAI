@@ -2,6 +2,8 @@ package com.recallai.backend.service;
 
 import com.recallai.backend.entity.LearningItem;
 import com.recallai.backend.repository.LearningItemRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +17,7 @@ public class LearningItemService {
         this.learningItemRepository = learningItemRepository;
     }
 
-    // Save a learning item
+    // Create a learning item
     public LearningItem saveLearningItem(LearningItem learningItem) {
         return learningItemRepository.save(learningItem);
     }
@@ -38,5 +40,10 @@ public class LearningItemService {
     // Search by subject
     public List<LearningItem> searchBySubject(String subject) {
         return learningItemRepository.findBySubjectContainingIgnoreCase(subject);
+    }
+
+    // Pagination
+    public Page<LearningItem> getLearningItemsWithPagination(Pageable pageable) {
+        return learningItemRepository.findAll(pageable);
     }
 }

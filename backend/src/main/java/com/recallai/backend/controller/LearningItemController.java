@@ -2,6 +2,8 @@ package com.recallai.backend.controller;
 
 import com.recallai.backend.entity.LearningItem;
 import com.recallai.backend.service.LearningItemService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,31 +20,48 @@ public class LearningItemController {
 
     // Create a learning item
     @PostMapping
-    public LearningItem createLearningItem(@RequestBody LearningItem learningItem) {
+    public LearningItem createLearningItem(
+            @RequestBody LearningItem learningItem) {
+
         return learningItemService.saveLearningItem(learningItem);
     }
 
     // Get all learning items
     @GetMapping
     public List<LearningItem> getAllLearningItems() {
+
         return learningItemService.getAllLearningItems();
     }
 
     // Get learning items by user
     @GetMapping("/user/{userId}")
-    public List<LearningItem> getLearningItemsByUserId(@PathVariable Long userId) {
+    public List<LearningItem> getLearningItemsByUserId(
+            @PathVariable Long userId) {
+
         return learningItemService.getLearningItemsByUserId(userId);
     }
 
-    // Search learning items by topic
+    // Search by topic
     @GetMapping("/search/topic")
-    public List<LearningItem> searchByTopic(@RequestParam String topic) {
+    public List<LearningItem> searchByTopic(
+            @RequestParam String topic) {
+
         return learningItemService.searchByTopic(topic);
     }
 
-    // Search learning items by subject
+    // Search by subject
     @GetMapping("/search/subject")
-    public List<LearningItem> searchBySubject(@RequestParam String subject) {
+    public List<LearningItem> searchBySubject(
+            @RequestParam String subject) {
+
         return learningItemService.searchBySubject(subject);
+    }
+
+    // Pagination
+    @GetMapping("/page")
+    public Page<LearningItem> getLearningItemsWithPagination(
+            Pageable pageable) {
+
+        return learningItemService.getLearningItemsWithPagination(pageable);
     }
 }
