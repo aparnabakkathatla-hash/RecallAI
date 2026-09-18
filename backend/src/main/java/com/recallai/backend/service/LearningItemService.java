@@ -46,4 +46,17 @@ public class LearningItemService {
     public Page<LearningItem> getLearningItemsWithPagination(Pageable pageable) {
         return learningItemRepository.findAll(pageable);
     }
+
+    // Update a learning item
+    public LearningItem updateLearningItem(Long id, LearningItem updatedItem) {
+
+        LearningItem existingItem = learningItemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Learning item not found"));
+
+        existingItem.setTopic(updatedItem.getTopic());
+        existingItem.setContent(updatedItem.getContent());
+        existingItem.setSubject(updatedItem.getSubject());
+
+        return learningItemRepository.save(existingItem);
+    }
 }

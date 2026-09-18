@@ -64,4 +64,13 @@ public class LearningItemController {
 
         return learningItemService.getLearningItemsWithPagination(pageable);
     }
+
+    // Update a learning item
+    @PutMapping("/{id}")
+    public LearningItem updateLearningItem(
+            @PathVariable Long id,
+            @RequestBody LearningItem learningItem) {
+
+        return learningItemService.updateLearningItem(id, learningItem);
+    }
 }
